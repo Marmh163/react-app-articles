@@ -4,12 +4,15 @@ require('dotenv').config()
 
 const connectDB = require('./config/db')
 
+const articlesRoutes = require('./routes/articles')
+
 const app = express()
 
 connectDB()
 
 app.use(cors())
 app.use(express.json())
+app.use('/articles' , articlesRoutes)
 
 app.get("/" , (req , res) =>{
     res.json({
