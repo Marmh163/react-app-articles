@@ -1,6 +1,8 @@
 const express = require ('express')
 const Article = require ('../models/Articles')
 const check = require("../validators/articleValidator")
+const AppError = require("../utils/AppError")
+
 
 const router = express.Router()
 
@@ -15,75 +17,56 @@ router.get("/" , async (req , res) => {
     }
 })
 
-router.post("/" ,async (req , res) => {
+router.post("/" ,async (req , res , next) => {
     try{
         const result = check(req.body)
         if(result !== true){
-            return res.status(400).json({
-                message : " Validation Failed",
-                errors: result
-            })
+            throw new AppError("Validation Failed" , 400 , result)
         }
         const article = await Article.create(req.body)
         res.status(201).json(article)
     } catch(error){
-        console.log(error)
-
-        res.status(500).json({
-            message:"Failed to create article",
-            error : error.message
-        })
+        next(error)
     }
 })
 
-router.get("/:id" , async (req , res) => {
+router.get("/:id" , async (req , res , next) => {
     try{
         const article = await Article.findById(req.params.id)
         if(!article){
-            return res.status(404).json({
-                message : "Article not found"
-            })
+            throw new AppError("Article not found" , 404)
         }
         res.status(200).json(article)
 
     }catch(error){
-        res.status(500).json({
-            message: "Failed to get article"
-        })
+        next(error)
     }
 })
 
-router.delete("/:id" , async (req , res) => {
+router.delete("/:id" , async (req , res , next) => {
     try{
         const article = await Article.findByIdAndDelete(req.params.id)
         if(!article) {
-            return res.status(404).json({
-                message : "Article not found"
-            })
+            throw new AppError("Article not found" , 404)
         }
         res.status(200).json({
             message : "Article deleted successfully"
         })
 
     } catch(error){
-        console.log(error)
-
-        res.status(500).json({
-            message : "Failed to delete article"
-        }
-        )
-
+        next(error)
     }
 })
 
-router.put("/:id" , async (req , res) => {
+router.put("/:id" , async (req , res , next) => {
     try{
         const result = check(req.body)
         if(result !== true){
             return res.status(400).json({
                 message : "Validation Failed",
-                errors : result
+                errors: result
             })
+
         }
 
         const article = await Article.findByIdAndUpdate(
@@ -92,18 +75,12 @@ router.put("/:id" , async (req , res) => {
             { new : true }
         )
         if(!article){
-            return res.status(404).json({
-                message : "Article not found"
-            })
+                throw new AppError("Article not found" , 404)
         }
         res.status(200).json(article)
 
     }catch(error){
-        console.log(error)
-
-        res.status(500).json({
-            message : "Failed to update article"
-        })
+        next(error)
 
     }
 })
