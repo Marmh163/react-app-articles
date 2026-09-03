@@ -8,6 +8,32 @@ const router = express.Router()
 
 router.get("/" , async (req , res , next) => {
     try{
+        const category = req.query.category
+        const sort = req.query.sort
+        const sortBy = req.query.sortBy
+        const search = req.query.search
+
+        if( sort && sort !== "asc" && sort !=="desc" ) {
+            throw new AppError("Invalid sort" , 400)
+        }
+
+        if(sortBy && sortBy !== "title" && sortBy !== "readingTime") {
+            throw new AppError("Invalid sortBy" , 400)
+        }
+        
+        console.log(sort)
+        const filter = {}
+        if (category) {
+            filter.category = category
+        }
+        if (search) {
+            filter.$or = [
+                { title: { $regex: search, $options: "i" } },
+                { description: { $regex: search, $options: "i" } }
+            ]
+        }
+        console.log(filter)
+
         const page = Number(req.query.page)
         if(req.query.page && (!Number.isInteger(page) || page < 1)){
             throw new AppError("Invalid page" , 400)
@@ -22,15 +48,29 @@ router.get("/" , async (req , res , next) => {
         const currentLimit = limit || 5
 
 
-        const total = await Article.countDocuments()
+        // const total = await Article.countDocuments()
+        const total = await Article.countDocuments(filter)
+        if( category && total ===0){
+            throw new AppError("Category not found" , 404)
+        }
         const totalPages = Math.ceil(total / currentLimit)
         if ( currentPage > totalPages && total > 0 ){
             throw new AppError("Page not found" , 404)
         }
         
-        const articles = await Article.find()
-                               .skip((currentPage - 1) * limit)
-                               .limit(currentLimit)
+        // const articles = await Article.find()
+        //                        .skip((currentPage - 1) * limit)
+        //                        .limit(currentLimit)
+        let sortOrder = 1
+        if( sort === "desc") {
+            sortOrder = -1
+        }
+
+        const sortField = sortBy || "readingTime"
+        const articles = await Article.find(filter)
+                                        .sort({ [sortField] : sortOrder })
+                                        .skip((currentPage - 1) * currentLimit)
+                                        .limit(currentLimit)
 
         console.log(total)
         console.log(totalPages)
