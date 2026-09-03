@@ -11,7 +11,7 @@ function Posts(){
     const [category, setCategory] = useState("")
     const [sortBy, setSortBy] = useState("")
     const [sort, setSort] = useState("")
-    const [posts, isPending] = useFetch(`http://localhost:5000/articles?page=${page}&limit=10&search=${searchQuery}&category=${category}&sortBy=${sortBy}&sort=${sort}`)
+    const [posts, isPending, error] = useFetch(`http://localhost:5000/articles?page=${page}&limit=10&search=${searchQuery}&category=${category}&sortBy=${sortBy}&sort=${sort}`)
     console.log(posts)
 
     return (
@@ -84,6 +84,8 @@ function Posts(){
         <div className="row">
             {isPending ? (
                 <Loading />
+            ) : error ? (
+                null
             ) : (
                 posts.articles.map(post => (
                     <ArticleItem
@@ -93,28 +95,31 @@ function Posts(){
                 ))
             )}
         </div>
-
-        <div className="mt-4 text-center">
+        
+        {/* Pagination */}
+        {!error && (
+            <div className="mt-4 text-center">
             <button 
-                className="btn btn-secondary me-2"
-                onClick={() => setPage(page - 1)}
-                disabled={page === 1}
-                >قبلی
-            </button>
-            {Array.from({ length: posts?.totalPages || 0 }, (_, index) => (
-            <button
-                key={index + 1} 
-                className={`btn me-2 ${page === index + 1 ? "btn-dark" : "btn-primary"}`}
-                onClick={() => setPage(index + 1)}
-            >{index + 1}</button>
-            ))}
-            <button 
-                className="btn btn-secondary me-2"
-                onClick={() => setPage(page + 1)}
-                disabled={page === posts?.totalPages}
-                >بعدی
-            </button>
-        </div>
+                    className="btn btn-secondary me-2"
+                    onClick={() => setPage(page - 1)}
+                    disabled={page === 1}
+                    >قبلی
+                </button>
+                {Array.from({ length: posts?.totalPages || 0 }, (_, index) => (
+                <button
+                    key={index + 1} 
+                    className={`btn me-2 ${page === index + 1 ? "btn-dark" : "btn-primary"}`}
+                    onClick={() => setPage(index + 1)}
+                >{index + 1}</button>
+                ))}
+                <button 
+                    className="btn btn-secondary me-2"
+                    onClick={() => setPage(page + 1)}
+                    disabled={page === posts?.totalPages}
+                    >بعدی
+                </button>
+            </div>
+        )}
 
     </div>
 )
