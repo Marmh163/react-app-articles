@@ -15,7 +15,7 @@ function useFetch(url){
             setIsPending(false)
         })
         .catch((err) => console.log(err))
-    }, [])
+    }, [url])
     return [datas, isPending]
 
     
