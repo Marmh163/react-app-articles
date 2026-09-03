@@ -8,10 +8,15 @@ function Posts(){
     const[page , setPage] = useState(1)
     const [search , setSearch] = useState("")
     const [searchQuery , setSearchQuery] = useState("")
-    const [posts, isPending] = useFetch(`http://localhost:5000/articles?page=${page}&limit=5&search=${searchQuery}`)
+    const [category, setCategory] = useState("")
+    const [sortBy, setSortBy] = useState("")
+    const [sort, setSort] = useState("")
+    const [posts, isPending] = useFetch(`http://localhost:5000/articles?page=${page}&limit=10&search=${searchQuery}&category=${category}&sortBy=${sortBy}&sort=${sort}`)
     console.log(posts)
+
     return (
     <div className="container">
+        <h5 className="mb-2">جستجوی مقاله</h5>
         <div className="mb-4 d-flex gap-2">
             <input
                 type="text"
@@ -26,10 +31,56 @@ function Posts(){
                 onClick={() => {
                     console.log("search:" , search)
                     setSearchQuery(search)
-                    }}>Search
+                    }}>جستجو
             </button>
         </div>
 
+        <h5 className="mb-2">دسته بندی</h5>
+        <div className="mb-4">
+            <select 
+                className="form-select" 
+                value={category} 
+                onChange={(e) => {
+                    setCategory(e.target.value)
+                    setPage(1)
+                }}
+                >
+                <option value="">همه دسته بندی ها</option>
+                <option value="Programming">Programming</option>
+                <option value="AI">AI</option>
+                <option value="database">database</option>
+            </select>
+        </div>
+
+        <div className="mb-4">
+            <h5 className="mb-2">مرتب سازی بر اساس</h5>
+            <select
+                className= "form-select"
+                value= {sortBy}
+                onChange={(e) => {
+                    setSortBy(e.target.value)
+                    setPage(1)
+                }}
+            >
+                <option value="">بدون مرتب سازی</option>
+                <option value="readingTime">زمان مطالعه</option>
+                <option value="title">عنوان</option>
+            </select>
+        </div>
+
+        <div className="mb-4">
+            <h5 className="mb-2">ترتیب</h5>
+            <select
+                className="form-select"
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+            >
+                <option value="">انتخاب ترتیب</option>
+                <option value="asc">کم به زیاد / A تا Z</option>
+                <option value="desc">زیاد به کم / Z تا A</option>
+            </select>
+        </div>
+        
         <div className="row">
             {isPending ? (
                 <Loading />
@@ -48,7 +99,7 @@ function Posts(){
                 className="btn btn-secondary me-2"
                 onClick={() => setPage(page - 1)}
                 disabled={page === 1}
-                >Previous
+                >قبلی
             </button>
             {Array.from({ length: posts?.totalPages || 0 }, (_, index) => (
             <button
@@ -61,7 +112,7 @@ function Posts(){
                 className="btn btn-secondary me-2"
                 onClick={() => setPage(page + 1)}
                 disabled={page === posts?.totalPages}
-                >Next
+                >بعدی
             </button>
         </div>
 
