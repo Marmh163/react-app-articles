@@ -1,30 +1,24 @@
 import useFetch from "../../components/Hooks/useFetch"
 import Loading from '../../components/loading/Loading'
+import ArticleItem from "../../components/article/ArticleItem"
 
 function Posts(){
     
     const [posts, isPending] = useFetch('http://localhost:5000/articles')
     console.log(posts)
     return(
-        <div>
+        
+        <div className="container">
+            <div className="row">
             {isPending ? (
                 <Loading />
                 ) : (
                 posts.articles.map(post =>(
-                <div key={post.id}>
-                    <hr />
-                    <h3>{post.title}</h3>
-                    <p>{post.description}</p>
-                    <p>نویسنده :{post.writter}</p>
-                    <p>دسته بندی :{post.category}</p>
-                    <p>زمان مطالعه :{post.readingTime}</p>
-                    {/* <p><b>{post.id}</b> -{post.title}</p> */}
-                </div>
-
+                    <ArticleItem key={post._id} article={post} />
             ))
             )}
+            </div>
         </div>
-
     )
 }
 export default Posts
