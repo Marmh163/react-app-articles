@@ -120,10 +120,12 @@ import Home from  "./pages/home/Home";
 import Article from "./pages/article/Article"
 import EditArticle from "./pages/editArticle/EditArticle"
 import AddArticle from "./pages/addArticle/AddArticle";
-
+import About from "./pages/about/About"
+import Navbar from "./components/navBar/MyNavBar"
 function App(){
     return(
         <BrowserRouter>
+            <Navbar />
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/posts' element={<Posts />} />
@@ -132,6 +134,8 @@ function App(){
                 <Route path='/articles/:articleID' element={<Article />} />
                 <Route path='/articles/edit/:articleID' element={<EditArticle />} />
                 <Route path='/articles/add' element={<AddArticle />} />
+                <Route path='about' element={<About />} />
+                
             </Routes>
         </BrowserRouter>
     )

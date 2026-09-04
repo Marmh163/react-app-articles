@@ -9,6 +9,7 @@
     "@testing-library/react": "^16.3.1",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.13.4",
+    "bcrypt": "^6.0.0",
     "bootstrap": "^5.3.8",
     "mathjs": "^15.1.0",
     "react": "^19.2.3",
@@ -49,10 +50,3 @@
     "json-server": "^1.0.0-beta.5"
   }
 }
-
-
-
-
-
-
-

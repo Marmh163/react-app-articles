@@ -4,6 +4,7 @@ require('dotenv').config()
 const connectDB = require('./config/db')
 const articlesRoutes = require('./routes/articles')
 const errorHandler = require('./middlewares/errorHandler')
+const usersRouter = require("./routes/users")
 
 const app = express()
 connectDB()
@@ -11,6 +12,8 @@ connectDB()
 app.use(cors())
 app.use(express.json())
 app.use('/articles' , articlesRoutes)
+app.use('/users' , usersRouter)
+
 
 
 app.get("/" , (req , res) =>{
