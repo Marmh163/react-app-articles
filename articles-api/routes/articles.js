@@ -2,6 +2,7 @@ const express = require ('express')
 const Article = require ('../models/Articles')
 const check = require("../validators/articleValidator")
 const AppError = require("../utils/AppError")
+const auth = require("../middlewares/auth")
 
 
 const router = express.Router()
@@ -87,7 +88,7 @@ router.get("/" , async (req , res , next) => {
     }
 })
 
-router.post("/" ,async (req , res , next) => {
+router.post("/" ,auth, async (req , res , next) => {
     try{
         const result = check(req.body)
         if(result !== true){
@@ -113,7 +114,7 @@ router.get("/:id" , async (req , res , next) => {
     }
 })
 
-router.delete("/:id" , async (req , res , next) => {
+router.delete("/:id" , auth, async (req , res , next) => {
     try{
         const article = await Article.findByIdAndDelete(req.params.id)
         if(!article) {
@@ -128,7 +129,7 @@ router.delete("/:id" , async (req , res , next) => {
     }
 })
 
-router.put("/:id" , async (req , res , next) => {
+router.put("/:id" , auth, async (req , res , next) => {
     try{
         const result = check(req.body)
         if(result !== true){

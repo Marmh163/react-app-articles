@@ -122,6 +122,8 @@ import EditArticle from "./pages/editArticle/EditArticle"
 import AddArticle from "./pages/addArticle/AddArticle";
 import About from "./pages/about/About"
 import Navbar from "./components/navBar/MyNavBar"
+import Footer from "./components/Footer/Footer"
+
 function App(){
     return(
         <BrowserRouter>
@@ -137,6 +139,7 @@ function App(){
                 <Route path='about' element={<About />} />
                 
             </Routes>
+            <Footer />
         </BrowserRouter>
     )
 }

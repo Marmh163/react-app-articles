@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 function Navbar() {
     return(
-        <nav className = "navbar navbar-expand-lg bg-dark navbar-dark">
+        <nav className = "navbar navbar-expand-lg bg-dark navbar-dark mb-5">
             <div className = "container">
                 <Link className="navbar-brand" to="/">مقالات من</Link>
                 <div className="navbar-nav"  dir="rtl"> 
@@ -14,5 +14,4 @@ function Navbar() {
         </nav>
     )
 }
-
 export default Navbar
