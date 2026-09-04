@@ -72,10 +72,34 @@ function EditArticle(){
     }
     if(error) {
         return <h1>خطا در دریافت اطلاعات</h1>
+
     }
     return(
         <div className="container mt-5" dir="rtl">
             <h1>ویرایش مقاله</h1>
+
+            <div className="mb-3">
+                <label className="form-label">عکس مقاله</label>
+                <div>
+                    <img
+                        src={image}
+                        alt={title}
+                        style={{width:"300px"}} />
+                </div>
+            </div>
+
+            <div className="mt-3">
+                <label className="form-label">آدرس عکس</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    value={image}
+                    onChange={(e) => {
+                        setImage(e.target.value)
+                    }}
+                />
+            </div>
+
             <div className="mb-3">
                 <label className="form-label">عنوان مقاله</label>
                 <input
@@ -85,6 +109,8 @@ function EditArticle(){
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </div>
+
+            
 
             <div className="mb-3">
                 <label className="form-label">توضیحات مقاله</label>

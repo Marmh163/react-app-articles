@@ -2,14 +2,41 @@ import { useParams } from "react-router-dom"
 import useFetch from "../../components/Hooks/useFetch"
 import Loading from "../../components/loading/Loading"
 import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
 import "./Article.css"
 
 function Article(){
     const {articleID} = useParams()
     const navigate = useNavigate()
     const [article, isPending , error] = useFetch(`http://localhost:5000/articles/${articleID}`)
-    console.log(articleID)
-    console.log(article)
+    const handleDelete = async () => {
+        const result = await Swal.fire({
+            title: "آیا مطمئن هستید؟",
+            text: "این مقاله حدف خواهد شد",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "بله حدف شود",
+            cancelButtonText: "لغو"
+        })
+        if(!result.isConfirmed){
+            return
+        }
+        const response = await fetch(`http://localhost:5000/articles/${articleID}`,
+            {
+                method: "DELETE"
+            }
+        )
+        const data = await response.json()
+        console.log(data)
+        if(response.ok){
+            await Swal.fire({
+                icon: "success",
+                title: "موفق",
+                text: "مقاله با موفقیت حدف شد"
+            })
+            navigate("/posts")
+        }
+    }
 
 return (
     <div className="container mt-5" dir="rtl">
@@ -52,7 +79,11 @@ return (
                                     className="btn btn-primary me-2"
                                     onClick={() => navigate(`/articles/edit/${articleID}`)}
                                 >ویرایش</button>
-                                <button className="btn btn-danger me-2">حذف</button>
+                                <button 
+                                    className="btn btn-danger me-2"
+                                    onClick={handleDelete}
+                                >حذف
+                                </button>
                             </div>
 
                         </div>

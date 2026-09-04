@@ -119,6 +119,7 @@ import Posts from "./pages/posts/Posts";
 import Home from  "./pages/home/Home";
 import Article from "./pages/article/Article"
 import EditArticle from "./pages/editArticle/EditArticle"
+import AddArticle from "./pages/addArticle/AddArticle";
 
 function App(){
     return(
@@ -130,6 +131,7 @@ function App(){
                 <Route path='/users' element={<Users />} />
                 <Route path='/articles/:articleID' element={<Article />} />
                 <Route path='/articles/edit/:articleID' element={<EditArticle />} />
+                <Route path='/articles/add' element={<AddArticle />} />
             </Routes>
         </BrowserRouter>
     )
