@@ -16,84 +16,92 @@ function Posts(){
 
     return (
     <div className="container">
-        <h5 className="mb-2">جستجوی مقاله</h5>
-        <div className="mb-4 d-flex gap-2">
-            <input
-                type="text"
-                className="form-control"
-                placeholder="جستجوی مقاله ..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-            />
-            <button 
-                type="button"
-                className="btn btn-primary mt-2 search-btn" 
-                onClick={() => {
-                    console.log("search:" , search)
-                    setSearchQuery(search)
-                    }}>جستجو
-            </button>
-        </div>
-
-        <h5 className="mb-2">دسته بندی</h5>
-        <div className="mb-4">
-            <select 
-                className="form-select" 
-                value={category} 
-                onChange={(e) => {
-                    setCategory(e.target.value)
-                    setPage(1)
-                }}
-                >
-                <option value="">همه دسته بندی ها</option>
-                <option value="Programming">Programming</option>
-                <option value="AI">AI</option>
-                <option value="database">database</option>
-            </select>
-        </div>
-
-        <div className="mb-4">
-            <h5 className="mb-2">مرتب سازی بر اساس</h5>
-            <select
-                className= "form-select"
-                value= {sortBy}
-                onChange={(e) => {
-                    setSortBy(e.target.value)
-                    setPage(1)
-                }}
-            >
-                <option value="">بدون مرتب سازی</option>
-                <option value="readingTime">زمان مطالعه</option>
-                <option value="title">عنوان</option>
-            </select>
-        </div>
-
-        <div className="mb-4">
-            <h5 className="mb-2">ترتیب</h5>
-            <select
-                className="form-select"
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-            >
-                <option value="">انتخاب ترتیب</option>
-                <option value="asc">کم به زیاد / A تا Z</option>
-                <option value="desc">زیاد به کم / Z تا A</option>
-            </select>
-        </div>
-        
-        <div className="row">
-            {isPending ? (
-                <Loading />
-            ) : error ? (
-                null
-            ) : (
-                posts.articles.map(post => (
-                    <ArticleItem
-                        key={post._id}
-                        article={post}
+        <div className="row" dir="rtl">
+            <div className="col-md-3">
+                <div className="filters">
+                <h5 className="mb-2">جستجوی مقاله</h5>
+                <div className="mb-4 d-flex gap-2">
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="جستجوی مقاله ..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                     />
-                ))
-            )}
+                    <button 
+                        type="button"
+                        className="btn btn-primary mt-2 search-btn" 
+                        onClick={() => {
+                            console.log("search:" , search)
+                            setSearchQuery(search)
+                            }}>جستجو
+                    </button>
+                </div>
+
+                <h5 className="mb-2">دسته بندی</h5>
+                <div className="mb-4">
+                    <select 
+                        className="form-select" 
+                        value={category} 
+                        onChange={(e) => {
+                            setCategory(e.target.value)
+                            setPage(1)
+                        }}
+                        >
+                        <option value="">همه دسته بندی ها</option>
+                        <option value="Programming">Programming</option>
+                        <option value="AI">AI</option>
+                        <option value="database">database</option>
+                    </select>
+                </div>
+
+                <div className="mb-4">
+                    <h5 className="mb-2">مرتب سازی بر اساس</h5>
+                    <select
+                        className= "form-select"
+                        value= {sortBy}
+                        onChange={(e) => {
+                            setSortBy(e.target.value)
+                            setPage(1)
+                        }}
+                    >
+                        <option value="">بدون مرتب سازی</option>
+                        <option value="readingTime">زمان مطالعه</option>
+                        <option value="title">عنوان</option>
+                    </select>
+                </div>
+
+                <div className="mb-4">
+                    <h5 className="mb-2">ترتیب</h5>
+                    <select
+                        className="form-select"
+                        value={sort}
+                        onChange={(e) => setSort(e.target.value)}
+                    >
+                        <option value="">انتخاب ترتیب</option>
+                        <option value="asc">کم به زیاد / A تا Z</option>
+                        <option value="desc">زیاد به کم / Z تا A</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+            
+            <div className="col-md-9 filters">
+                <div className="row">
+                    {isPending ? (
+                        <Loading />
+                    ) : error ? (
+                        null
+                    ) : (
+                        posts.articles.map(post => (
+                            <ArticleItem
+                                key={post._id}
+                                article={post}
+                            />
+                        ))
+                    )}
+                </div>
+            </div>
         </div>
         
         {/* Pagination */}

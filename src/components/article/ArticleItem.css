@@ -17,6 +17,13 @@
 .article-description {
     color: #666;
     line-height: 1.8;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
 }
 
 .article-info {
@@ -27,5 +34,16 @@
 .article-card img{
     width: 100%;
     height: 220px;
-    object-fit: cover;
+    object-fit: contain;
+}
+
+.article-read-more{
+    display: inline-block;
+    text-decoration: none;
+    color: #0d6efd;
+    margin-bottom: 15px;
+}
+
+.article-read-more:hover{
+    text-decoration: underline;
 }

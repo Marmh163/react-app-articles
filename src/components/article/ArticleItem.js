@@ -1,4 +1,5 @@
 import "./ArticleItem.css"
+import { Link } from "react-router-dom"
 console.log("ArticleItem css loaded")
 function ArticleItem({ article }) {
     return (
@@ -14,6 +15,9 @@ function ArticleItem({ article }) {
                     <p className="card-text article-description">
                         {article.description}
                     </p>
+                    <Link 
+                    to={`/articles/${article._id}`}
+                    className="article-read-more">ادامه مطلب</Link>
 
                     <p className="article-info">
                         <strong>نویسنده:</strong> {article.writter}
