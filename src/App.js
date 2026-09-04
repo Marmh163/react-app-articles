@@ -116,7 +116,10 @@ import { BrowserRouter , Routes , Route} from "react-router-dom";
 import Users from "./pages/users/Users";
 import Todos from "./pages/todos/Todos";
 import Posts from "./pages/posts/Posts";
-import Home from  "./pages/home/Home"
+import Home from  "./pages/home/Home";
+import Article from "./pages/article/Article"
+import EditArticle from "./pages/editArticle/EditArticle"
+
 function App(){
     return(
         <BrowserRouter>
@@ -125,6 +128,8 @@ function App(){
                 <Route path='/posts' element={<Posts />} />
                 <Route path='/todos' element={<Todos />} />
                 <Route path='/users' element={<Users />} />
+                <Route path='/articles/:articleID' element={<Article />} />
+                <Route path='/articles/edit/:articleID' element={<EditArticle />} />
             </Routes>
         </BrowserRouter>
     )
