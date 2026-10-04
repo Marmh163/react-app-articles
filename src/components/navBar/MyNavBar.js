@@ -4,7 +4,6 @@ import AuthContext from "../../context/AuthContext"
 
 function Navbar() {
     const { currentUser , logout } = useContext(AuthContext)
-    console.log(currentUser)
     return(
         <nav className = "navbar navbar-expand-lg bg-dark navbar-dark  ms-auto" dir="rtl">
             <div className="container">
@@ -30,11 +29,20 @@ function Navbar() {
                         
                     </div>
                 ) : (
-                    <Link
-                        to="/login"
-                        className="btn btn-outline-light btn-sm">
-                        ورود
-                    </Link>
+            
+            <div className="d-flex align-items-center gap-2">
+                <Link
+                    to="/login"
+                    className="btn btn-outline-light btn-sm">
+                    ورود
+                </Link>
+
+                <Link
+                    to="/register"
+                    className="btn btn-outline-light btn-sm">
+                    ثبت نام
+                </Link>
+            </div>
                 )}
 
             </div>

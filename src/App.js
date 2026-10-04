@@ -13,6 +13,7 @@ import Navbar from "./components/navBar/MyNavBar"
 import Footer from "./components/Footer/Footer"
 import Login from "./pages/login/Login"
 import { AuthProvider } from "./context/AuthContext"
+import Register from "./pages/register/Register";
 
 function App(){
     return(
@@ -28,7 +29,8 @@ function App(){
                     <Route path='/articles/edit/:articleID' element={<EditArticle />} />
                     <Route path='/articles/add' element={<AddArticle />} />
                     <Route path='about' element={<About />} />
-                    <Route path='login' element={<Login />} />        
+                    <Route path='login' element={<Login />} /> 
+                    <Route path='/register' element={<Register />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>
