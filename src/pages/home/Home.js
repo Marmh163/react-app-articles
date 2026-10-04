@@ -3,7 +3,7 @@ import "./Home.css"
 import useFetch from "../../components/Hooks/useFetch"
 import ArticleItem from "../../components/article/ArticleItem";
 import { Swiper , SwiperSlide } from "swiper/react"
-import { Navigation } from "swiper/modules"
+import { Navigation , Autoplay } from "swiper/modules"
 import "swiper/css"
 
 
@@ -35,7 +35,7 @@ function Home() {
 
             </section>
 
-            <section className="latest-articles container my-5" dir="rtl">
+            <section className="latest-articles container" dir="rtl">
                 <h2 className="latest-title mb-4">آخرین مقالات</h2>
 
               <div className="latest-carousel">
@@ -43,7 +43,11 @@ function Home() {
     <button className="swiper-prev">‹</button>
 
     <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
+        autoplay={{
+            delay: 3000,
+            disableOnInteraction: false
+        }}
         navigation={{
             prevEl: ".swiper-prev",
             nextEl: ".swiper-next"

@@ -100,7 +100,7 @@ router.post("/login", async (req, res, next) => {
 
 router.get("/me" , auth , async (req , res, next) => {
     try{
-        const user = await User.findById(req.user.id).select("_password")
+        const user = await User.findById(req.user.id).select("-password")
         if( !user ){
             return next(new AppError("User not found" , 404))
         }

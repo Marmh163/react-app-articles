@@ -23,7 +23,10 @@ function Article(){
         }
         const response = await fetch(`http://localhost:5000/articles/${articleID}`,
             {
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
             }
         )
         const data = await response.json()
