@@ -123,6 +123,7 @@ import AddArticle from "./pages/addArticle/AddArticle";
 import About from "./pages/about/About"
 import Navbar from "./components/navBar/MyNavBar"
 import Footer from "./components/Footer/Footer"
+import Login from "./pages/login/Login"
 
 function App(){
     return(
@@ -137,6 +138,7 @@ function App(){
                 <Route path='/articles/edit/:articleID' element={<EditArticle />} />
                 <Route path='/articles/add' element={<AddArticle />} />
                 <Route path='about' element={<About />} />
+                <Route path='login' element={<Login />} />
                 
             </Routes>
             <Footer />
