@@ -48,8 +48,18 @@ function Home() {
             prevEl: ".swiper-prev",
             nextEl: ".swiper-next"
         }}
-        slidesPerView={3}
         spaceBetween={20}
+            breakpoints={{
+            0: {
+                slidesPerView: 1,
+            },
+            768: {
+                slidesPerView: 2,
+            },
+            992: {
+                slidesPerView: 3,
+            }
+        }}
         grabCursor={true}
     >
         {posts?.articles?.map(post => (

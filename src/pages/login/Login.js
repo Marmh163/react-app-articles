@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { useContext } from "react"
+import AuthContext from "../../context/AuthContext"
 import Swal from "sweetalert2"
 
 function Login(){
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const { setCurrentUser } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -30,6 +33,7 @@ function Login(){
                 }
 
                 localStorage.setItem("token" , data.token)
+                setCurrentUser(data.user)
 
                 await Swal.fire({
                     icon: "success",
