@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./Home.css"
 import useFetch from "../../components/Hooks/useFetch"
 import ArticleItem from "../../components/article/ArticleItem";
@@ -9,7 +8,7 @@ import "swiper/css"
 
 
 function Home() {
-    const [posts, isPending, error] = useFetch('http://localhost:5000/articles?page=1&limit=4')
+    const [posts] = useFetch('http://localhost:5000/articles?page=1&limit=4')
     
 
     return (
@@ -27,7 +26,7 @@ function Home() {
                         </div>
                         <div className="col-md-7">
                             <div className="hero-box">
-                                <img src="https://ychef.files.bbci.co.uk/2000x1125/p073l4xc.jpeg" />
+                                <img src="https://ychef.files.bbci.co.uk/2000x1125/p073l4xc.jpeg" alt="برنامه نویسی و تکنولوژی" />
                             </div>
                         </div>
                     </div>
