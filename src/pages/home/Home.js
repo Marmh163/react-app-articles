@@ -3,14 +3,13 @@ import useFetch from "../../components/Hooks/useFetch"
 import ArticleItem from "../../components/article/ArticleItem";
 import { Swiper , SwiperSlide } from "swiper/react"
 import { Navigation , Autoplay } from "swiper/modules"
+import { Link } from "react-router-dom";
 import "swiper/css"
 
 
 
 function Home() {
-    const [posts] = useFetch('http://localhost:5000/articles?page=1&limit=4')
-    
-
+    const [posts] = useFetch(`${process.env.REACT_APP_API_URL}/articles?page=1&limit=4`)
     return (
         <main className="home-page">
             <section className="hero">
@@ -21,7 +20,7 @@ function Home() {
                                 <br /> از اینجا شروع می شود
                             </h1>
                             <p>مقالات کاربردی و آموزنده در زمینه برنامه نویسی و تکنولوژی</p>
-                            <a href="/posts" className="btn btn-outline-dark btn-lg">مشاهده مقالات</a>
+                            <Link to="/posts" className="btn btn-outline-primary">مشاهده مقالات</Link>
                             
                         </div>
                         <div className="col-md-7">

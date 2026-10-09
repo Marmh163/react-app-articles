@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 
 function EditArticle(){
     const { articleID } = useParams()
-    const [ article, isPending, error]=useFetch(`http://localhost:5000/articles/${articleID}`)
+    const [ article, isPending, error]=useFetch(`${process.env.REACT_APP_API_URL}/articles/${articleID}`)
     console.log(article)
     const [image, setImage] = useState("")
     const [title, setTitle] = useState("")
@@ -30,7 +30,7 @@ function EditArticle(){
     }, [article])
 
     const handleSubmit = async () => {
-        const response = await fetch(`http://localhost:5000/articles/${articleID}`,
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/articles/${articleID}`,
             {
                 method: "PUT",
                 headers: {

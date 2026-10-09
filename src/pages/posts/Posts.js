@@ -11,7 +11,7 @@ function Posts(){
     const [category, setCategory] = useState("")
     const [sortBy, setSortBy] = useState("")
     const [sort, setSort] = useState("")
-    const [posts, isPending, error] = useFetch(`http://localhost:5000/articles?page=${page}&limit=10&search=${searchQuery}&category=${category}&sortBy=${sortBy}&sort=${sort}`)
+    const [posts, isPending, error] = useFetch(`${process.env.REACT_APP_API_URL}/articles?page=${page}&limit=10&search=${searchQuery}&category=${category}&sortBy=${sortBy}&sort=${sort}`)
     console.log(posts)
 
     return (

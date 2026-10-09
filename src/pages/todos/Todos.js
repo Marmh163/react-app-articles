@@ -3,7 +3,7 @@ import Loading from '../../components/loading/Loading'
 
 function Todos(){
     
-    const [todos, isPending] = useFetch('http://localhost:5000/todos')
+    const [todos, isPending] = useFetch(`${process.env.REACT_APP_API_URL}/todos`)
     return(
         <div>
             {isPending ? (

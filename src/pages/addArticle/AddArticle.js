@@ -19,7 +19,7 @@ function AddArticle() {
             category,
             readingTime: Number(readingTime)
         }
-        const response = await fetch('http://localhost:5000/articles', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/articles`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -8,7 +8,7 @@ import "./Article.css"
 function Article(){
     const {articleID} = useParams()
     const navigate = useNavigate()
-    const [article, isPending , error] = useFetch(`http://localhost:5000/articles/${articleID}`)
+    const [article, isPending , error] = useFetch(`${process.env.REACT_APP_API_URL}/articles/${articleID}`)
     const handleDelete = async () => {
         const result = await Swal.fire({
             title: "آیا مطمئن هستید؟",
@@ -21,7 +21,7 @@ function Article(){
         if(!result.isConfirmed){
             return
         }
-        const response = await fetch(`http://localhost:5000/articles/${articleID}`,
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/articles/${articleID}`,
             {
                 method: "DELETE",
                 headers: {

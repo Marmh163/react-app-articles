@@ -4,7 +4,7 @@ import Loading from '../../components/loading/Loading'
 
 function Users(){
     
-    const [users, isPending] = useFetch('http://localhost:5000/users')
+    const [users, isPending] = useFetch(`${process.env.REACT_APP_API_URL}/users`)
     useEffect(()=>{
         console.log('posts rendered' , users , isPending)
     })

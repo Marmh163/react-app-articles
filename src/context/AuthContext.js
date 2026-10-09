@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const token = localStorage.getItem("token")
         if(!token) return
-        fetch("http://localhost:5000/users/me" , {
+        fetch(`${process.env.REACT_APP_API_URL}/users/me` , {
             headers: {
                 Authorization: `Bearer ${token}`
             }
